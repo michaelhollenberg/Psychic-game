@@ -50,8 +50,10 @@
 
 
     function gameOver(isGameWon)  {
+        computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)]; 
         if (isGameWon) {
             alert('You won')
+
         } else {
             alert('You are out of Guesses')
             lossCount++;
