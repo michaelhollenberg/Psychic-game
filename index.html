@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <title>Psychic Game
+  </title>
+</head>
+<body>
+  <div id="game">
+    <h1>Mike's Psychic Game</h1>
+    <h3>Guess what letter I'm thinking of</h3>
+    <h2>Wins: <span id="winCount">0</span></h2>
+    <h2>Losses: <span id="lossCount">0</span></h2>
+    <h2>Guesses Remaining: <span id="guessRemaining">10</span></h2>
+    <h2>Your Guesses so far: <span id="yourGuesses">[]</span></h2>
+  </div>
+  <script type="text/javascript">
+    
+    var computerChoices = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o',];
+    var winCount = 0;
+    var lossCount = 0;
+    var guessRemaining = 10;
+    var yourGuesses = [];
+    var winDisplay = document.getElementById("winCount");
+    var lossDisplay = document.getElementById("lossCount");
+    var guessDisplay = document.getElementById("guessRemaining");
+    var yourDisplay = document.getElementById("yourGuesses")
+    // This function is run whenever the user presses a key.
+    var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+    document.onkeyup = function(event) {
+        var userGuess = event.key;
+        yourGuesses.push(userGuess);
+        yourDisplay.textContent = yourGuesses;
+
+       
+        if (userGuess === computerGuess) {
+            winCount++;
+            winDisplay.textContent = winCount;
+            gameOver(true);
+            
+        } else {
+            
+            guessRemaining--;
+            guessDisplay.textContent = guessRemaining;
+            if (guessRemaining === 0) {
+                gameOver(false);
+            }
+        }
+    }
+
+
+    function gameOver(isGameWon)  {
+        if (isGameWon) {
+            alert('You won')
+        } else {
+            alert('You are out of Guesses')
+            lossCount++;
+            lossDisplay.textContent = lossCount;
+        }
+        guessRemaining = 10;
+        guessDisplay.textContent = guessRemaining;
+        yourDisplay.textContent = '[]';
+        yourGuesses = [];
+        
+    }
+  </script>
+</body>
+</html>
